@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        accentColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
       home: const MyHomePage(),
@@ -41,42 +42,43 @@ class _MyHomePageState extends State<MyHomePage> {
     return SafeArea(
       child: Scaffold(
       body: _getnavigation( pageIndex ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        selectedFontSize: 12,
-        elevation: 1,
-        showSelectedLabels: true,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home_rounded),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.pie_chart_outline_rounded), 
-            label: 'Portfolio',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.wysiwyg_outlined),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.widgets_rounded),
-            label: 'Prices',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-          ),
-        ],
-        currentIndex: pageIndex,
-        onTap: (index) {
-          setState(() {
-            pageIndex = index;
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          selectedFontSize: 12,
+          elevation: 1,
+          showSelectedLabels: true,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home_outlined),
+              activeIcon: Icon(Icons.home_rounded),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.pie_chart_outline_rounded),
+              label: 'Portfolio',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.wysiwyg_outlined),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.widgets_rounded),
+              label: 'Prices',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'Settings',
+            ),
+          ],
+          currentIndex: pageIndex,
 
-          });
-        },
-      ),
+          onTap: (index) {
+            setState(() {
+              pageIndex = index;
+            });
+          },
+
+        ),
       )
     );
   }
@@ -87,4 +89,5 @@ class _MyHomePageState extends State<MyHomePage> {
         return const MainWidget();
     }
   }
+
 }

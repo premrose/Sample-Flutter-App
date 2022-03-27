@@ -25,7 +25,6 @@ class MainWidgetState extends State<MainWidget> {
   Future<List<Model>> getModelsList() async {
     final response = await http.get(
         Uri.parse('https://firebasestorage.googleapis.com/v0/b/jill-soap-6a1ac.appspot.com/o/maps.json?alt=media&token=bfd28b0f-06d7-4d25-8d45-e218466c7449'));
-
     if (response.statusCode == 200) {
       final items = jsonDecode(response.body)['routes'][0]['legs'][0];
       return [Model.fromJson(items)];
@@ -66,7 +65,7 @@ class MainWidgetState extends State<MainWidget> {
                         child: Row(
                           children: [
                             Expanded(
-                                child: Column(
+                              child: Column(
                                   children: [
                                     Row(
                                       mainAxisAlignment : MainAxisAlignment.spaceBetween,
@@ -184,93 +183,91 @@ class MainWidgetState extends State<MainWidget> {
                           width : itemWidth / 1.1,
                           padding: const EdgeInsets.only(top:5.0, bottom: 5.0, left: 15.0, right: 5.0, ),
                           decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(5),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.grey,
-                                  offset: Offset(1.0,1.0), //Offset
-                                  blurRadius: 1.0,
-                                  spreadRadius: 0.2,
-                                ),
-                              ]
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(5),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.grey,
+                                offset: Offset(1.0,1.0), //Offset
+                                blurRadius: 1.0,
+                                spreadRadius: 0.2,
+                              ),
+                            ]
                           ),
                           child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Expanded(
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment : MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Column(
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment : MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(data.roadTime.toUpperCase(),
+                                                style: const TextStyle(
+                                                  fontSize: 18.0,
+                                                  fontWeight: FontWeight.w800,
+                                                ),
+                                              ),
+                                              Row(
                                                 children: [
-                                                  Text(data.roadTime.toUpperCase(),
+                                                  Text(data.roadPath,
                                                     style: const TextStyle(
-                                                      fontSize: 18.0,
+                                                      fontSize: 12.0,
                                                       fontWeight: FontWeight.w800,
                                                     ),
                                                   ),
-                                                  Row(
-                                                    children: [
-                                                      Text(data.roadPath,
-                                                        style: const TextStyle(
-                                                          fontSize: 12.0,
-                                                          fontWeight: FontWeight.w800,
-                                                        ),
-                                                      ),
-                                                      const SizedBox(width:2.0),
-                                                      Text(data.travelMode,
-                                                        style: const TextStyle(
-                                                          fontSize: 12.0,
-                                                          fontWeight: FontWeight.w800,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  )
-                                                ]
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.only(right: 5),
-                                              child: Text(data.roadPath,
-                                                style: const TextStyle(
-                                                  fontSize: 20.0,
-                                                  fontWeight: FontWeight.w900,
-                                                ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        const Divider(
-                                          color: Colors.grey,
-                                          thickness: 0.3,
-                                        ),
-                                        Text(data.htmlInstructions,
-                                          style: const TextStyle(
-                                              fontFamily: 'Roboto',
-                                              fontSize: 12
+                                                  const SizedBox(width:2.0),
+                                                  Text(data.travelMode,
+                                                    style: const TextStyle(
+                                                      fontSize: 12.0,
+                                                      fontWeight: FontWeight.w800,
+                                                    ),
+                                                  ),
+                                                ],
+                                              )
+                                            ]
                                           ),
+                                          Padding(
+                                            padding: EdgeInsets.only(right: 5),
+                                            child: Text(data.roadPath,
+                                              style: const TextStyle(
+                                                fontSize: 20.0,
+                                                fontWeight: FontWeight.w900,
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      const Divider(
+                                        color: Colors.grey,
+                                        thickness: 0.3,
+                                      ),
+                                      Text(data.htmlInstructions,
+                                        style: const TextStyle(
+                                          fontFamily: 'Roboto',
+                                          fontSize: 12
                                         ),
-                                      ],
-                                    )
+                                      ),
+                                    ],
+                                  )
                                 )
-
                               ]
                           ),
                         )
                     )
                   ]
                 );
-
               }
             );
           }
           else if (snapshot.hasError) {
-            print(snapshot.error);
+            return Text('${snapshot.error}');
           }
           return const Center(
               child: CircularProgressIndicator(
@@ -284,82 +281,3 @@ class MainWidgetState extends State<MainWidget> {
   }
 }
 
-class ListHeading extends StatelessWidget {
-  const ListHeading({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-
-    var size = MediaQuery.of(context).size;
-    final double itemHeight = size.height / 3;
-    final double itemWidth = size.width;
-
-    return Container(
-      height : itemHeight / 4,
-      width : itemWidth / 1.1,
-      padding: const EdgeInsets.only(top:5.0, bottom: 5.0, left: 15.0, right: 5.0, ),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(5),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.grey,
-            offset: Offset(1.0,1.0), //Offset
-            blurRadius: 1.0,
-            spreadRadius: 0.2,
-          ),
-        ]
-    ),
-      child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("data.name".toUpperCase(),
-                        style: const TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      Row(
-                        children: const [
-                          Text('Rating',
-                            style: TextStyle(
-                              fontSize: 12.0,
-                              fontWeight: FontWeight.w800,
-                            ),
-                          ),
-                          SizedBox(width:2.0),
-                          Text("data.location",
-                            style: TextStyle(
-                              fontSize: 12.0,
-                              fontWeight: FontWeight.w800,
-                            ),
-                          ),
-                        ],
-                      )
-                    ]
-                ),
-              ],
-            ),
-            Row(
-              children: const [
-                Text("₹ +data.oldRate",
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ],
-            ),
-          ]
-      ),
-    );
-  }
-}
