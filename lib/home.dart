@@ -234,7 +234,7 @@ class MainWidgetState extends State<MainWidget> {
                                             ]
                                           ),
                                           Padding(
-                                            padding: EdgeInsets.only(right: 5),
+                                            padding: const EdgeInsets.only(right: 5),
                                             child: Text(data.roadPath,
                                               style: const TextStyle(
                                                 fontSize: 20.0,
